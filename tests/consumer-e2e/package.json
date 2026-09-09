@@ -1,0 +1,13 @@
+{
+  "name": "xq-platform-consumer-e2e",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "cypress:run": "cypress run --config-file cypress.config.ts"
+  },
+  "dependencies": {
+    "@xq/cypress-platform": "file:../../packages/cypress-platform",
+    "cypress": ">=13 <16"
+  }
+}

@@ -1,0 +1,7 @@
+.DS_Store
+.npmrc
+node_modules/
+.codex-log/
+worktrees/
+memory/*.ndjson
+memory/.locks/

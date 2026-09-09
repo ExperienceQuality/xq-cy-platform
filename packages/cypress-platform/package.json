@@ -1,0 +1,22 @@
+{
+  "name": "@xq/cypress-platform",
+  "version": "0.1.0",
+  "description": "Composable Cypress platform for XQ consumer repositories",
+  "type": "module",
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "exports": {
+    "./plugin": { "types": "./dist/plugin/index.d.ts", "default": "./dist/plugin/index.js" },
+    "./support": { "types": "./dist/support/index.d.ts", "default": "./dist/support/index.js" },
+    "./package.json": "./package.json"
+  },
+  "peerDependencies": {
+    "cypress": ">=13 <16"
+  },
+  "devDependencies": {
+    "cypress": ">=13 <16",
+    "typescript": "^5.7.0"
+  }
+}
