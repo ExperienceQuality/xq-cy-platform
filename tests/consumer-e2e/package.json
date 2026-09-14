@@ -9,5 +9,8 @@
   "dependencies": {
     "@xq/cypress-platform": "file:../../packages/cypress-platform",
     "cypress": ">=13 <16"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
   }
 }

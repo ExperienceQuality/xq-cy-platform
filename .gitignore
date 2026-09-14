@@ -1,7 +1,10 @@
 .DS_Store
 .npmrc
 node_modules/
+dist/
 .codex-log/
 worktrees/
 memory/*.ndjson
 memory/.locks/
+**/*/dist/
+.idea/

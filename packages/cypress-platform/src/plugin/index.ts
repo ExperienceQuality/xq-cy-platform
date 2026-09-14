@@ -3,13 +3,6 @@ export interface CompanyCapabilities {
   testData?: boolean
 }
 
-export interface CompanyConfig {
-  env?: Record<string, unknown>
-  [key: string]: unknown
-}
-
-export type CypressEventHandler = (event: string, value: unknown) => void
-
 const DEFAULTS: Required<CompanyCapabilities> = { reporting: true, testData: true }
 
 export function normalizeOptions(options: CompanyCapabilities = {}): Required<CompanyCapabilities> {
@@ -19,23 +12,23 @@ export function normalizeOptions(options: CompanyCapabilities = {}): Required<Co
   return { ...DEFAULTS, ...options }
 }
 
-function registerTask(on: CypressEventHandler, name: string, task: (value: unknown) => unknown): void {
+function registerTask(on: Cypress.PluginEvents, name: string, task: (value: unknown) => unknown): void {
   on("task", { [name]: task })
 }
 
-function registerCompanyTasks(on: CypressEventHandler, options: Required<CompanyCapabilities>): void {
+function registerCompanyTasks(on: Cypress.PluginEvents, options: Required<CompanyCapabilities>): void {
   if (options.testData) registerTask(on, "xq:echoTestData", (value) => value ?? null)
 }
 
-export function applyCompanyDefaults(config: CompanyConfig): CompanyConfig {
+export function applyCompanyDefaults(config: Cypress.PluginConfigOptions): Cypress.PluginConfigOptions {
   return { ...config, env: { ...(config.env ?? {}), xqPlatform: true } }
 }
 
 export async function setupCompanyCypress(
-  on: CypressEventHandler,
-  config: CompanyConfig,
+  on: Cypress.PluginEvents,
+  config: Cypress.PluginConfigOptions,
   capabilities: CompanyCapabilities = {}
-): Promise<CompanyConfig> {
+): Promise<Cypress.PluginConfigOptions> {
   const options = normalizeOptions(capabilities)
   registerCompanyTasks(on, options)
   return applyCompanyDefaults({

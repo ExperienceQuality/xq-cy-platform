@@ -2,11 +2,18 @@
   "name": "xq-cy-platform-workspace",
   "private": true,
   "type": "module",
-  "workspaces": ["packages/*", "apps/*", "tests/*"],
+  "workspaces": [
+    "packages/*",
+    "apps/*",
+    "tests/*"
+  ],
   "scripts": {
     "test": "node --test tests/*.test.mjs",
     "build:platform": "npm run build --workspace @xq/cypress-platform",
     "start:dummy-api": "npm run start --workspace dummy-api",
     "test:consumer:docker": "bash scripts/run-cypress-docker.sh"
+  },
+  "devDependencies": {
+    "@types/node": "^26.5.1"
   }
 }
