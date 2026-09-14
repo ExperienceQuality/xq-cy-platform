@@ -1,8 +1,9 @@
 import test from "node:test"
 import assert from "node:assert/strict"
-import { normalizeOptions, setupCompanyCypress } from "../packages/cypress-platform/src/plugin/index.ts"
+import { loadPlatformSource } from "./helpers/load-platform-source.mjs"
 
 test("platform enables documented defaults", async () => {
+  const { setupCompanyCypress } = await loadPlatformSource()
   const registrations = []
   const config = await setupCompanyCypress((event, value) => registrations.push([event, value]), { env: { app: "dummy" } })
 
@@ -14,11 +15,13 @@ test("platform enables documented defaults", async () => {
 })
 
 test("disabled test data does not register its task", async () => {
+  const { setupCompanyCypress } = await loadPlatformSource()
   const registrations = []
   await setupCompanyCypress((event, value) => registrations.push([event, value]), {}, { testData: false })
   assert.deepEqual(registrations, [])
 })
 
-test("unknown capabilities fail clearly", () => {
+test("unknown capabilities fail clearly", async () => {
+  const { normalizeOptions } = await loadPlatformSource()
   assert.throws(() => normalizeOptions({ vendorPlugin: true }), /Unknown Cypress platform capability: vendorPlugin/)
 })
